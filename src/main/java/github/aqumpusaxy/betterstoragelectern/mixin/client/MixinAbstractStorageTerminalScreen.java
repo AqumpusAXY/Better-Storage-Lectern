@@ -85,7 +85,6 @@ public abstract class MixinAbstractStorageTerminalScreen<T extends AbstractConta
 
 
     //修改GUI初始化设置
-    @SuppressWarnings("SpellCheckingInspection")
     @Inject(method = "init", at = @At("RETURN"))
     private void onInit(CallbackInfo ci) {
         searchField.active = true;
