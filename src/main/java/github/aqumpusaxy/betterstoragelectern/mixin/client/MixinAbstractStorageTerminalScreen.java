@@ -5,6 +5,7 @@ import com.hollingsworth.arsnouveau.client.container.SortSettings;
 import com.hollingsworth.arsnouveau.client.container.StoredItemStack;
 import com.hollingsworth.arsnouveau.client.gui.NoShadowTextField;
 import com.hollingsworth.arsnouveau.setup.config.Config;
+import github.aqumpusaxy.betterstoragelectern.BSLConfig;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -50,7 +51,11 @@ public abstract class MixinAbstractStorageTerminalScreen<T extends AbstractConta
                     target = "Lcom/hollingsworth/arsnouveau/client/gui/NoShadowTextField;setValue(Ljava/lang/String;)V"
             )
     )
-    private void onPacketSetValue(NoShadowTextField instance, String s) {}
+    private void onPacketSetValue(NoShadowTextField instance, String s) {
+        if (!BSLConfig.INSTANCE.SAVE_SEARCH_FIELD_CONTENT.get()) return;
+
+        instance.setValue(s);
+    }
 
     //取消上次关闭时文本框有内容,下次打开GUI聚焦
     @Redirect(
@@ -84,6 +89,9 @@ public abstract class MixinAbstractStorageTerminalScreen<T extends AbstractConta
     @Inject(method = "init", at = @At("RETURN"))
     private void onInit(CallbackInfo ci) {
         searchField.active = true;
+
+        if (BSLConfig.INSTANCE.AUTO_FOCUS_SEARCH_FIELD_ON_OPENED.get()) return;
+
         searchField.setFocused(false);
         setFocused(null);
     }
@@ -91,6 +99,8 @@ public abstract class MixinAbstractStorageTerminalScreen<T extends AbstractConta
     //重写按键逻辑
     @Inject(method = "keyPressed", at = @At("HEAD"), cancellable = true)
     private void onKeyPressed(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
+        if (BSLConfig.INSTANCE.AUTO_FOCUS_SEARCH_FIELD_ON_KEY_PRESSED.get()) return;
+
         if (keyCode == GLFW.GLFW_KEY_ESCAPE) {
             this.onClose();
             cir.setReturnValue(true);
@@ -109,6 +119,8 @@ public abstract class MixinAbstractStorageTerminalScreen<T extends AbstractConta
     //重写字符输入逻辑
     @Inject(method = "charTyped", at = @At("HEAD"), cancellable = true)
     private void onCharTyped(char codePoint, int modifiers, CallbackInfoReturnable<Boolean> cir) {
+        if (BSLConfig.INSTANCE.AUTO_FOCUS_SEARCH_FIELD_ON_KEY_PRESSED.get()) return;
+
         if (searchField.isFocused() && searchField.active) {
             boolean handled = searchField.charTyped(codePoint, modifiers);
             cir.setReturnValue(handled);
