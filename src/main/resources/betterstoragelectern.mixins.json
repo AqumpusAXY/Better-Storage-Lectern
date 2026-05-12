@@ -6,8 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "client.ANConfigMixin",
-    "client.AbstractStorageTerminalScreenMixin"
+    "client.MixinAbstractStorageTerminalScreen",
+    "client.MixinANConfig"
   ],
   "injectors": {
     "defaultRequire": 1

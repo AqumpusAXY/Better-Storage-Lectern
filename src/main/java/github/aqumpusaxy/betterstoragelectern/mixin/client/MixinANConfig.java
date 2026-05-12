@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = Config.class, remap = false)
-public abstract class ANConfigMixin {
+public abstract class MixinANConfig {
     @Shadow
     public static ModConfigSpec.BooleanValue INVERT_LECTERN_SCROLLING;
 
