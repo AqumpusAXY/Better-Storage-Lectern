@@ -24,12 +24,14 @@ public class BSLLangProvider extends LanguageProvider {
     }
 
     private void addEnglishTranslations() {
+        addConfig(BSLConfig.INSTANCE.ENABLE_SINGLE_ROW_SCROLLING, "Enable single row scrolling");
         addConfig(BSLConfig.INSTANCE.AUTO_FOCUS_SEARCH_FIELD_ON_OPENED, "Auto focus search field on opened");
         addConfig(BSLConfig.INSTANCE.AUTO_FOCUS_SEARCH_FIELD_ON_KEY_PRESSED, "Auto focus search field on key pressed");
         addConfig(BSLConfig.INSTANCE.SAVE_SEARCH_FIELD_CONTENT, "Save search field content");
     }
 
     private void addChineseTranslations() {
+        addConfig(BSLConfig.INSTANCE.ENABLE_SINGLE_ROW_SCROLLING, "启用单行滚动");
         addConfig(BSLConfig.INSTANCE.AUTO_FOCUS_SEARCH_FIELD_ON_OPENED, "打开时自动聚焦搜索栏");
         addConfig(BSLConfig.INSTANCE.AUTO_FOCUS_SEARCH_FIELD_ON_KEY_PRESSED, "按下按键时自动聚焦搜索栏");
         addConfig(BSLConfig.INSTANCE.SAVE_SEARCH_FIELD_CONTENT, "保存搜索栏内容");

@@ -1,5 +1,6 @@
 {
   "betterstoragelectern.configuration.auto_focus_search_field_on_key_pressed": "按下按键时自动聚焦搜索栏",
   "betterstoragelectern.configuration.auto_focus_search_field_on_opened": "打开时自动聚焦搜索栏",
+  "betterstoragelectern.configuration.enable_single_row_scrolling": "启用单行滚动",
   "betterstoragelectern.configuration.save_search_field_content": "保存搜索栏内容"
 }

@@ -7,15 +7,20 @@ public class BSLConfig {
     public static final BSLConfig INSTANCE;
     public static final ModConfigSpec CLIENT_CONFIG_SPEC;
 
+    public final ModConfigSpec.BooleanValue ENABLE_SINGLE_ROW_SCROLLING;
     public final ModConfigSpec.BooleanValue AUTO_FOCUS_SEARCH_FIELD_ON_OPENED;
     public final ModConfigSpec.BooleanValue AUTO_FOCUS_SEARCH_FIELD_ON_KEY_PRESSED;
     public final ModConfigSpec.BooleanValue SAVE_SEARCH_FIELD_CONTENT;
 
+    private static final String PATH_ENABLE_SINGLE_ROW_SCROLLING = "enable_single_row_scrolling";
     private static final String PATH_AUTO_FOCUS_SEARCH_FIELD_ON_OPENED = "auto_focus_search_field_on_opened";
     private static final String PATH_AUTO_FOCUS_SEARCH_FIELD_ON_KEY_PRESSED = "auto_focus_search_field_on_key_pressed";
     private static final String PATH_SAVE_SEARCH_FIELD_CONTENT = "save_search_field_content";
 
     private BSLConfig(ModConfigSpec.Builder builder) {
+        ENABLE_SINGLE_ROW_SCROLLING = builder
+                .comment("If the Storage Lectern GUI should scroll one row at a time")
+                .define(PATH_ENABLE_SINGLE_ROW_SCROLLING, true);
         AUTO_FOCUS_SEARCH_FIELD_ON_OPENED = builder
                 .comment("If the search field should be focused when the Storage Lectern GUI is opened")
                 .define(PATH_AUTO_FOCUS_SEARCH_FIELD_ON_OPENED, false);

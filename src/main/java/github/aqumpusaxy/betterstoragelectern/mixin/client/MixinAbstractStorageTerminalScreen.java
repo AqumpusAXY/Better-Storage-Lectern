@@ -78,6 +78,11 @@ public abstract class MixinAbstractStorageTerminalScreen<T extends AbstractConta
             )
     )
     private void onMouseScrolled(AbstractStorageTerminalScreen<?> instance, float value, double p_mouseScrolled_1_, double p_mouseScrolled_3_, double p_mouseScrolled_5_, double scrollY) {
+        if (!BSLConfig.INSTANCE.ENABLE_SINGLE_ROW_SCROLLING.get()) {
+            this.currentScroll = value;
+            return;
+        }
+
         int screenLines = this.getSortSettings() == null || !this.getSortSettings().expanded() ? 3 : 7;
         int remainingLines = (this.itemsSorted.size() + 9 - 1) / 9 - screenLines;
         this.currentScroll = (float) (this.currentScroll + (Config.INVERT_LECTERN_SCROLLING.getAsBoolean() ? -scrollY : scrollY) / remainingLines);

@@ -1,5 +1,6 @@
 {
   "betterstoragelectern.configuration.auto_focus_search_field_on_key_pressed": "Auto focus search field on key pressed",
   "betterstoragelectern.configuration.auto_focus_search_field_on_opened": "Auto focus search field on opened",
+  "betterstoragelectern.configuration.enable_single_row_scrolling": "Enable single row scrolling",
   "betterstoragelectern.configuration.save_search_field_content": "Save search field content"
 }
