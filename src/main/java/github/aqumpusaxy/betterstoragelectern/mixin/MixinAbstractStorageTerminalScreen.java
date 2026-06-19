@@ -1,0 +1,59 @@
+package github.aqumpusaxy.betterstoragelectern.mixin;
+
+import com.hollingsworth.arsnouveau.client.container.AbstractStorageTerminalScreen;
+import com.hollingsworth.arsnouveau.client.container.SortSettings;
+import com.hollingsworth.arsnouveau.client.container.StorageTerminalMenu;
+import com.hollingsworth.arsnouveau.client.gui.NoShadowTextField;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.Redirect;
+
+@Mixin(AbstractStorageTerminalScreen.class)
+public abstract class MixinAbstractStorageTerminalScreen<T extends StorageTerminalMenu> extends AbstractContainerScreen<T> {
+    @Shadow
+    public abstract SortSettings getSortSettings();
+
+    private MixinAbstractStorageTerminalScreen(T p_97741_, Inventory p_97742_, Component p_97743_) {
+        super(p_97741_, p_97742_, p_97743_);
+    }
+
+    //取消自动聚焦搜索框
+    @Redirect(
+            method = "onPacket",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lcom/hollingsworth/arsnouveau/client/gui/NoShadowTextField;setFocused(Z)V"
+            )
+    )
+    private void onOnPacketSetSearchFieldFocused(NoShadowTextField instance, boolean b) {
+        //TODO: Configurable
+    }
+
+    @Redirect(
+            method = "onPacket",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lcom/hollingsworth/arsnouveau/client/gui/NoShadowTextField;setValue(Ljava/lang/String;)V"
+            )
+    )
+    private void onInitSetSearchFieldValue(NoShadowTextField instance, String value) {
+        //TODO: Configurable
+    }
+
+    @ModifyVariable(
+            method = "mouseScrolled",
+            at = @At(
+                    value = "STORE"
+            ),
+            name = "i"
+    )
+    private int modifyMouseScrolledI(int i) {
+        //你自己算算就知道是啥了
+        return i + (this.getSortSettings() == null || this.getSortSettings().expanded ? -2 : 2);
+    }
+}
