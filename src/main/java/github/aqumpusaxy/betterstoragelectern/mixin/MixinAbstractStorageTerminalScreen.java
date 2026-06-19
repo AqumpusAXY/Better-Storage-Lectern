@@ -4,6 +4,7 @@ import com.hollingsworth.arsnouveau.client.container.AbstractStorageTerminalScre
 import com.hollingsworth.arsnouveau.client.container.SortSettings;
 import com.hollingsworth.arsnouveau.client.container.StorageTerminalMenu;
 import com.hollingsworth.arsnouveau.client.gui.NoShadowTextField;
+import github.aqumpusaxy.betterstoragelectern.BSLConfig;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -31,7 +32,7 @@ public abstract class MixinAbstractStorageTerminalScreen<T extends StorageTermin
             )
     )
     private void onOnPacketSetSearchFieldFocused(NoShadowTextField instance, boolean b) {
-        //TODO: Configurable
+        instance.setFocused(BSLConfig.INSTANCE.AUTO_FOCUS_SEARCH_FIELD_ON_OPENED.get());
     }
 
     @Redirect(
@@ -42,7 +43,8 @@ public abstract class MixinAbstractStorageTerminalScreen<T extends StorageTermin
             )
     )
     private void onInitSetSearchFieldValue(NoShadowTextField instance, String value) {
-        //TODO: Configurable
+        if (!BSLConfig.INSTANCE.SAVE_SEARCH_FIELD_CONTENT.get()) return;
+        instance.setValue(value);
     }
 
     @ModifyVariable(

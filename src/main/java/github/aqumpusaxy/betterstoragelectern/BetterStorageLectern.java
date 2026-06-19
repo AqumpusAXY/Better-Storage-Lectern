@@ -11,5 +11,6 @@ import org.slf4j.Logger;
 public final class BetterStorageLectern {
     private static final Logger LOGGER = LogUtils.getLogger();
     public BetterStorageLectern(FMLJavaModLoadingContext ctx) {
+        ctx.registerConfig(ModConfig.Type.CLIENT, BSLConfig.CONFIG_SPEC);
     }
 }
