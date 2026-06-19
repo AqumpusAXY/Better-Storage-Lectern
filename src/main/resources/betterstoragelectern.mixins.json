@@ -2,12 +2,11 @@
   "required": true,
   "minVersion": "0.8",
   "package": "github.aqumpusaxy.betterstoragelectern.mixin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "betterstoragelectern.refmap.json",
   "mixins": [
   ],
   "client": [
-    "client.ANConfigMixin",
-    "client.AbstractStorageTerminalScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
