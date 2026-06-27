@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = AbstractStorageTerminalScreen.class, remap = false)
+@Mixin(AbstractStorageTerminalScreen.class)
 public abstract class MixinAbstractStorageTerminalScreen<T extends StorageTerminalMenu> extends AbstractContainerScreen<T> {
     @Unique
     private long BSL$lastSearchTime = 0L;
